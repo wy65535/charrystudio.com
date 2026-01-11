@@ -1,0 +1,30 @@
+# Cloudflare Pages Redirects Configuration
+
+# Redirect common typos
+/cherrystudio   /   301
+/cherry-studio  /   301
+/home           /   301
+/index          /   301
+
+# Redirect old URLs (if any in future)
+/about          /   301
+/download       https://www.cherry-ai.com/download   302
+
+# Short link for registration
+/register       https://open.cherryin.ai/register?aff=fVPl   302
+/signup         https://open.cherryin.ai/register?aff=fVPl   302
+/start          https://open.cherryin.ai/register?aff=fVPl   302
+/get-started    https://open.cherryin.ai/register?aff=fVPl   302
+
+# Documentation redirect
+/docs           https://docs.cherry-ai.com   302
+/documentation  https://docs.cherry-ai.com   302
+
+# GitHub redirect
+/github         https://github.com/CherryHQ/cherry-studio   302
+
+# Official site redirect
+/official       https://www.cherry-ai.com   302
+
+# 404 page
+/*  /404.html   404
