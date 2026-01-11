@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cherry Studio - 全能的AI助手工作站，支持300+主流AI模型，免费开源的跨平台AI客户端。集成OpenAI、Claude、Gemini等顶级AI服务，提供智能对话、AI编程、AI绘画等强大功能。">
+    <meta name="keywords" content="cherry studio, cherryin, cherry ai, AI助手, AI客户端, OpenAI客户端, Claude客户端, AI工具, 免费AI, AI对话, AI编程, AI绘画, 多模型AI, 本地AI">
+    <meta name="author" content="CharryStudio.com">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Cherry Studio - 全能AI助手工作站 | 免费开源多模型客户端">
+    <meta property="og:description" content="Cherry Studio是一款支持300+主流AI模型的跨平台客户端，集成OpenAI、Claude、Gemini等服务，提供智能对话、编程、绘画等功能。完全免费，数据本地存储。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://charrystudio.com">
+    <meta property="og:site_name" content="CharryStudio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cherry Studio - 全能AI助手工作站">
+    <meta name="twitter:description" content="支持300+主流AI模型的免费开源客户端">
+    <link rel="canonical" href="https://charrystudio.com">
+    <title>Cherry Studio - 全能AI助手工作站 | 免费开源多模型客户端 | CharryStudio</title>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Cherry Studio",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "37600"
+        },
+        "description": "Cherry Studio 是一款支持300+主流AI模型的跨平台客户端，集成OpenAI、Claude、Gemini等服务，提供智能对话、编程、绘画等功能。",
+        "featureList": [
+            "支持300+AI模型",
+            "多平台支持",
+            "本地数据存储",
+            "智能助手",
+            "知识库功能",
+            "AI绘画",
+            "AI翻译"
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "CharryStudio",
+        "url": "https://charrystudio.com",
+        "description": "Cherry Studio 官方推广站 - 全能AI助手工作站",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://charrystudio.com/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CharryStudio",
+        "url": "https://charrystudio.com",
+        "logo": "https://charrystudio.com/logo.png",
+        "sameAs": [
+            "https://github.com/CherryHQ/cherry-studio",
+            "https://x.com/CherryStudioHQ"
+        ]
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #ec4899;
+            --secondary-color: #8b5cf6;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .button-primary {
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+        
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid white;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+        
+        .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.125rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            background: var(--light-bg);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        /* Models Section */
+        .models {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+        
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .model-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .model-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .model-card h4 {
+            margin-top: 1rem;
+            color: var(--text-dark);
+        }
+        
+        /* Comparison Table */
+        .comparison {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            margin-top: 3rem;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-table th {
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: var(--light-bg);
+        }
+        
+        .check {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .cross {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-card p {
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.5rem;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: var(--light-bg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+        }
+        
+        .disclaimer {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">CharryStudio</div>
+            <ul>
+                <li><a href="#features">功能特性</a></li>
+                <li><a href="guide.html">使用教程</a></li>
+                <li><a href="#comparison">产品对比</a></li>
+                <li><a href="#faq">常见问题</a></li>
+            </ul>
+            <a href="https://open.cherryin.ai/register?aff=fVPl" class="cta-button" target="_blank" rel="noopener">立即开始</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Cherry Studio - 你的超级 AI 工作站</h1>
+            <p>智能对话 · 自主 Agent · 无限创造，统一接入 300+ 主流大模型</p>
+            <div class="hero-buttons">
+                <a href="https://open.cherryin.ai/register?aff=fVPl" class="button-primary" target="_blank" rel="noopener">免费开始使用</a>
+                <a href="#features" class="button-secondary">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>300+</h3>
+                    <p>支持的 AI 模型</p>
+                </div>
+                <div class="stat-card">
+                    <h3>50+</h3>
+                    <p>AI 服务商</p>
+                </div>
+                <div class="stat-card">
+                    <h3>37.6K+</h3>
+                    <p>GitHub Stars</p>
+                </div>
+                <div class="stat-card">
+                    <h3>100%</h3>
+                    <p>免费开源</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Cherry Studio 核心功能</h2>
+            <p class="section-subtitle">一站式 AI 助手平台，释放 AI 的无限可能</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>多模型自由切换</h3>
+                    <p>支持 50+ AI 服务商，包括 OpenAI、Claude、Gemini、DeepSeek、Kimi、通义千问等云端模型，以及 Ollama、LM Studio 等本地模型，一个客户端满足所有需求。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>智能对话体验</h3>
+                    <p>支持基础 AI 对话、文档对话、图像对话，甚至公式和 HTML 预览。强大的上下文管理能力，让对话更加流畅自然。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>AI 绘画创作</h3>
+                    <p>支持多种主流绘图模型，包括 DALL-E、Midjourney、Stable Diffusion 等，尽情发挥你的想象力，让 AI 帮你完成艺术创作。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>AI 编程助手</h3>
+                    <p>内置代码高亮、语法检查、代码生成等功能，支持多种编程语言，让编程效率提升 10 倍。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>AI 翻译工具</h3>
+                    <p>无论是翻译页还是对话栏，Cherry Studio 都能快速准确地翻译你输入的内容，支持 100+ 种语言互译。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>内置智能助手</h3>
+                    <p>Cherry Studio 内置了千余个各种分类的智能助手，覆盖写作、编程、学习、翻译、营销等场景，让你使用大模型更加高效。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>知识库管理</h3>
+                    <p>支持导入本地文件（PDF、Word、Excel、Markdown）和网页作为知识源，快速构建你的专属知识库，AI 可基于知识库内容回答问题。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>隐私安全保护</h3>
+                    <p>所有数据存储在本地设备，Cherry Studio 不会上传任何数据到第三方服务器。支持 WebDAV 备份，数据安全有保障。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>高性能表现</h3>
+                    <p>采用现代化技术栈开发，响应速度快，支持流式输出，生成速度超过 100 tokens/秒，提供流畅的使用体验。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>跨平台支持</h3>
+                    <p>完美支持 Windows、macOS 和 Linux 系统，界面美观统一，支持亮色/暗色主题切换，适配各种使用场景。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>MCP 协议支持</h3>
+                    <p>完全支持 MCP（模型上下文协议）服务器，可通过外部工具和服务扩展功能，连接数据库、文件系统、Web 服务等。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🆓</div>
+                    <h3>免费模型体验</h3>
+                    <p>合作伙伴免费提供 AI 模型，包括智谱 GLM-4.5-Air、通义千问 Qwen3-8B 等，无需 API Key，下载即用。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="models">
+        <div class="container">
+            <h2 class="section-title">一个入口，连接所有 AI</h2>
+            <p class="section-subtitle">无缝集成 300+ 主流大模型，自由切换，随心所用</p>
+            
+            <div class="models-grid">
+                <div class="model-card">
+                    <h4>OpenAI</h4>
+                    <p>GPT-4, GPT-4o</p>
+                </div>
+                <div class="model-card">
+                    <h4>Anthropic</h4>
+                    <p>Claude 3.5</p>
+                </div>
+                <div class="model-card">
+                    <h4>Google</h4>
+                    <p>Gemini Pro</p>
+                </div>
+                <div class="model-card">
+                    <h4>DeepSeek</h4>
+                    <p>DeepSeek V3</p>
+                </div>
+                <div class="model-card">
+                    <h4>智谱 AI</h4>
+                    <p>GLM-4</p>
+                </div>
+                <div class="model-card">
+                    <h4>通义千问</h4>
+                    <p>Qwen Max</p>
+                </div>
+                <div class="model-card">
+                    <h4>Moonshot</h4>
+                    <p>Kimi</p>
+                </div>
+                <div class="model-card">
+                    <h4>字节跳动</h4>
+                    <p>豆包</p>
+                </div>
+                <div class="model-card">
+                    <h4>Ollama</h4>
+                    <p>本地模型</p>
+                </div>
+                <div class="model-card">
+                    <h4>xAI</h4>
+                    <p>Grok</p>
+                </div>
+                <div class="model-card">
+                    <h4>Meta</h4>
+                    <p>Llama</p>
+                </div>
+                <div class="model-card">
+                    <h4>更多...</h4>
+                    <p>持续更新</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="comparison">
+        <div class="container">
+            <h2 class="section-title">Cherry Studio vs 竞品对比</h2>
+            <p class="section-subtitle">为什么选择 Cherry Studio？数据说明一切</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>功能特性</th>
+                        <th>Cherry Studio</th>
+                        <th>ChatBox</th>
+                        <th>Cursor</th>
+                        <th>ChatGPT Plus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>完全免费</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                        <td class="cross">✗（$20/月）</td>
+                    </tr>
+                    <tr>
+                        <td>开源项目</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                        <td class="cross">✗</td>
+                    </tr>
+                    <tr>
+                        <td>支持模型数量</td>
+                        <td class="check">300+</td>
+                        <td>50+</td>
+                        <td>10+</td>
+                        <td>仅 OpenAI</td>
+                    </tr>
+                    <tr>
+                        <td>本地模型支持</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                        <td class="cross">✗</td>
+                    </tr>
+                    <tr>
+                        <td>知识库功能</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                    </tr>
+                    <tr>
+                        <td>内置智能助手</td>
+                        <td class="check">1000+</td>
+                        <td>50+</td>
+                        <td>100+</td>
+                        <td>基础功能</td>
+                    </tr>
+                    <tr>
+                        <td>AI 绘画</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                        <td class="cross">✗</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>多平台支持</td>
+                        <td class="check">Win/Mac/Linux</td>
+                        <td class="check">Win/Mac/Linux</td>
+                        <td>Win/Mac</td>
+                        <td>Web/移动端</td>
+                    </tr>
+                    <tr>
+                        <td>数据隐私</td>
+                        <td class="check">本地存储</td>
+                        <td class="check">本地存储</td>
+                        <td>云端存储</td>
+                        <td>云端存储</td>
+                    </tr>
+                    <tr>
+                        <td>MCP 协议支持</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                    </tr>
+                    <tr>
+                        <td>自定义 API Key</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                    </tr>
+                    <tr>
+                        <td>GitHub Stars</td>
+                        <td class="check">37.6K+</td>
+                        <td>18K+</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">常见问题解答</h2>
+            <p class="section-subtitle">关于 Cherry Studio 你可能想了解的一切</p>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Cherry Studio 是什么？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Cherry Studio 是一款跨平台的 AI 对话客户端，支持 Windows、macOS 和 Linux。它集成了 300+ 主流 AI 模型，包括 OpenAI、Claude、Gemini 等云端模型，也支持通过 Ollama 和 LM Studio 使用本地模型。除了 AI 助手之外，Cherry Studio 还具备强大的 Agent 智能体能力——自主思考、规划和行动的 AI。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Cherry Studio 完全免费吗？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        是的，Cherry Studio 社区版完全免费且开源，采用 AGPL-3.0 开源协议。个人使用完全免费。软件本身不收取任何费用，但使用某些 AI 模型可能需要自己的 API Key，这些费用由模型提供商收取。同时，平台也提供部分免费模型供用户体验。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        我的数据安全吗？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        非常安全。您的所有数据（对话记录、设置、知识库文件）都存储在本地设备上，Cherry Studio 不会将任何数据上传到第三方服务器。您对数据隐私拥有完全的控制权。同时支持 WebDAV 备份功能，方便多设备同步。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Cherry Studio 支持哪些 AI 模型？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Cherry Studio 支持 50+ AI 服务商的 300+ 个模型，包括：OpenAI (GPT-4, GPT-4o)、Anthropic (Claude 3.5)、Google (Gemini)、DeepSeek、Kimi、通义千问、智谱 AI、豆包、Grok 等。同时支持通过 Ollama 和 LM Studio 使用本地模型，实现完全离线运行。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Cherry Studio 与 ChatGPT 有什么区别？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Cherry Studio 是一个客户端软件，可以同时接入包括 ChatGPT 在内的多个 AI 服务。相比 ChatGPT：1）支持更多模型选择；2）数据本地存储更安全；3）功能更丰富（知识库、绘画、翻译等）；4）完全免费开源；5）支持本地模型离线使用。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        知识库功能如何使用？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        知识库功能允许您导入文档（PDF、Word、Excel、TXT、Markdown）和网页来创建个人 AI 助手。AI 可以基于您导入的内容回答问题，非常适合研究、文档分析和个性化问答场景。只需在软件中选择知识库，导入文件，AI 就能理解和引用这些内容。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Cherry Studio 需要什么配置要求？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Cherry Studio 对系统配置要求不高。基本要求：Windows 10/11、macOS 10.13+ 或 Linux，4GB 内存，500MB 可用存储空间。如果要运行本地大模型（Ollama），建议 16GB 内存和独立显卡以获得更好性能。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        如何获取 API Key？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        不同模型的 API Key 获取方式不同。对于 OpenAI，需要到 OpenAI 官网注册并购买；对于国内模型如通义千问、智谱 AI 等，需要到各自官网申请。Cherry Studio 也提供了部分免费模型，无需 API Key 即可使用。您可以通过平台获取这些服务的便捷访问方式。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Cherry Studio 支持团队协作吗？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Cherry Studio 提供企业版，支持团队协作、权限管理、统一计费等企业级功能。社区版主要面向个人用户，通过 WebDAV 备份功能可以在多设备间同步数据，但不具备团队协作功能。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        遇到问题如何获得帮助？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        您可以通过多种方式获得帮助：1）访问官方文档 docs.cherry-ai.com；2）在 GitHub 提交 Issue；3）加入 Telegram、Discord 或 QQ 社区群；4）发送邮件至 support@cherry-ai.com。社区活跃，通常能快速得到回复。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Cherry Studio 未来有什么规划？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Cherry Studio 团队持续在更新和优化产品。未来计划包括：支持更多 AI 模型、增强 Agent 能力、优化用户界面、增加更多智能助手模板、改进知识库功能、提供更多企业级特性等。项目在 GitHub 上开源，欢迎社区贡献。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        如何开始使用 Cherry Studio？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        开始使用非常简单：1）访问平台注册账号；2）下载并安装 Cherry Studio 客户端；3）配置 API Key 或使用免费模型；4）开始与 AI 对话。整个过程不超过 5 分钟，官方提供详细的新手教程。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>立即开始你的 AI 之旅</h2>
+            <p>加入全球数十万用户，体验最强大的 AI 工作站</p>
+            <a href="https://open.cherryin.ai/register?aff=fVPl" class="button-primary" target="_blank" rel="noopener">免费注册使用</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于 Cherry Studio</h3>
+                    <p>Cherry Studio 是一款支持多平台的 AI 客户端，致力于让更多人能够享受到 AI 带来的便利。我们提供最全面的 AI 模型接入方案，保护用户隐私，提供卓越体验。</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="https://open.cherryin.ai/register?aff=fVPl" target="_blank" rel="noopener">立即开始</a></li>
+                        <li><a href="#features">功能特性</a></li>
+                        <li><a href="guide.html">使用教程</a></li>
+                        <li><a href="#comparison">产品对比</a></li>
+                        <li><a href="#faq">常见问题</a></li>
+                        <li><a href="privacy.html">隐私政策</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>资源中心</h3>
+                    <ul>
+                        <li><a href="https://docs.cherry-ai.com" target="_blank" rel="noopener">使用文档</a></li>
+                        <li><a href="https://github.com/CherryHQ/cherry-studio" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.cherry-ai.com" target="_blank" rel="noopener">官方网站</a></li>
+                        <li><a href="https://open.cherryin.ai/register?aff=fVPl" target="_blank" rel="noopener">获取 API 访问</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>社区</h3>
+                    <ul>
+                        <li><a href="https://t.me/CherryStudioAI" target="_blank" rel="noopener">Telegram</a></li>
+                        <li><a href="https://x.com/CherryStudioHQ" target="_blank" rel="noopener">Twitter/X</a></li>
+                        <li><a href="https://github.com/CherryHQ/cherry-studio" target="_blank" rel="noopener">GitHub 社区</a></li>
+                        <li><a href="https://www.producthunt.com/products/cherry-studio" target="_blank" rel="noopener">Product Hunt</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="disclaimer">
+                <strong>Affiliate 免责声明：</strong>本网站包含联盟链接。当您通过本站链接注册或购买服务时，我们可能会获得佣金。这不会增加您的成本，反而能帮助我们继续提供优质内容和服务推荐。我们仅推荐我们真正使用和相信的产品。感谢您的支持！
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 CharryStudio.com - All Rights Reserved | <a href="privacy.html" style="color: rgba(255,255,255,0.6);">隐私政策</a></p>
+                <p>本站是 Cherry Studio 的独立推广网站，非官方网站</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const answer = item.querySelector('.faq-answer');
+                const isOpen = answer.style.display === 'block';
+                
+                // Close all FAQs
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.style.display = 'none';
+                });
+                document.querySelectorAll('.faq-question span').forEach(span => {
+                    span.textContent = '+';
+                });
+                
+                // Toggle current FAQ
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                    question.querySelector('span').textContent = '-';
+                }
+            });
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
