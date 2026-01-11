@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cherry Studio 完整使用教程：从安装到精通，学习如何使用Cherry Studio连接多个AI模型，配置API密钥，使用知识库等高级功能。">
+    <meta name="keywords" content="cherry studio教程, cherry studio使用方法, cherry studio安装, AI客户端教程, cherry studio配置, cherry studio知识库, 多模型AI使用">
+    <meta name="robots" content="index, follow">
+    <title>Cherry Studio 完整使用教程 | 从入门到精通 | CharryStudio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #ec4899;
+            --secondary-color: #8b5cf6;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .page-header {
+            background: var(--gradient);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            margin: 3rem auto;
+            max-width: 1200px;
+        }
+        
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .toc {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .toc h3 {
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: var(--primary-color);
+        }
+        
+        .content {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .content h2 {
+            color: var(--text-dark);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.875rem;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 0.5rem;
+        }
+        
+        .content h2:first-child {
+            margin-top: 0;
+        }
+        
+        .content h3 {
+            color: var(--text-dark);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.375rem;
+        }
+        
+        .content h4 {
+            color: var(--text-dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .content p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .content ul, .content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+            margin: 1.5rem 0;
+        }
+        
+        .tip-box {
+            background: #ecfdf5;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #10b981;
+            margin: 1.5rem 0;
+        }
+        
+        .warning-box {
+            background: #fef3c7;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #f59e0b;
+            margin: 1.5rem 0;
+        }
+        
+        .step {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .cta-inline {
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        
+        .cta-inline:hover {
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        footer a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">CharryStudio</a>
+            <ul>
+                <li><a href="index.html#features">功能特性</a></li>
+                <li><a href="guide.html">使用教程</a></li>
+                <li><a href="index.html#faq">常见问题</a></li>
+                <li><a href="privacy.html">隐私政策</a></li>
+            </ul>
+            <a href="https://open.cherryin.ai/register?aff=fVPl" class="cta-button" target="_blank" rel="noopener">立即开始</a>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Cherry Studio 完整使用教程</h1>
+            <p>从安装到精通，掌握最强大的 AI 工作站</p>
+        </div>
+    </div>
+
+    <div class="container content-wrapper">
+        <aside class="sidebar">
+            <nav class="toc">
+                <h3>目录</h3>
+                <ul>
+                    <li><a href="#intro">什么是 Cherry Studio</a></li>
+                    <li><a href="#install">安装与设置</a></li>
+                    <li><a href="#quickstart">快速开始</a></li>
+                    <li><a href="#models">配置 AI 模型</a></li>
+                    <li><a href="#features">核心功能使用</a></li>
+                    <li><a href="#advanced">高级技巧</a></li>
+                    <li><a href="#tips">最佳实践</a></li>
+                    <li><a href="#troubleshooting">常见问题</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section id="intro">
+                <h2>什么是 Cherry Studio？</h2>
+                <p>Cherry Studio 是一款功能强大的跨平台 AI 客户端，它将多个 AI 服务整合到一个统一的界面中。无论你是开发者、内容创作者、学生还是企业用户，Cherry Studio 都能成为你的超级 AI 工作站。</p>
+                
+                <div class="highlight-box">
+                    <strong>核心优势：</strong>
+                    <ul>
+                        <li>支持 300+ 主流 AI 模型（OpenAI、Claude、Gemini、DeepSeek等）</li>
+                        <li>完全免费开源，GitHub 37.6K+ Stars</li>
+                        <li>数据本地存储，保护隐私安全</li>
+                        <li>跨平台支持 Windows、macOS、Linux</li>
+                        <li>内置千余智能助手模板</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="install">
+                <h2>安装与设置</h2>
+                
+                <h3>系统要求</h3>
+                <ul>
+                    <li><strong>操作系统：</strong>Windows 10/11、macOS 10.13+、或 Linux</li>
+                    <li><strong>内存：</strong>最低 4GB RAM（推荐 8GB 以上）</li>
+                    <li><strong>存储：</strong>至少 500MB 可用空间</li>
+                    <li><strong>网络：</strong>稳定的互联网连接（使用云端模型时）</li>
+                </ul>
+                
+                <h3>下载安装</h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>注册账号</strong>
+                    <p>首先，访问 <a href="https://open.cherryin.ai/register?aff=fVPl" target="_blank" rel="noopener" class="cta-inline">注册页面</a> 创建你的账号。这将帮助你更方便地管理 API 访问和模型配置。</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>下载客户端</strong>
+                    <p>访问 Cherry Studio 官网下载页面，选择适合你操作系统的版本：</p>
+                    <ul>
+                        <li><strong>Windows：</strong>下载 .exe 安装包</li>
+                        <li><strong>macOS：</strong>下载 .dmg 或 .pkg 文件</li>
+                        <li><strong>Linux：</strong>下载 .AppImage、.deb 或 .rpm 包</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>安装软件</strong>
+                    <ul>
+                        <li><strong>Windows：</strong>双击安装包，按提示完成安装</li>
+                        <li><strong>macOS：</strong>拖动到 Applications 文件夹，首次打开可能需要在安全设置中允许</li>
+                        <li><strong>Linux：</strong>给予执行权限后运行，或使用包管理器安装</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>💡 提示：</strong>安装完成后，建议将 Cherry Studio 设置为开机自启动，这样你可以随时快速使用 AI 助手。
+                </div>
+            </section>
+
+            <section id="quickstart">
+                <h2>快速开始</h2>
+                
+                <h3>首次启动</h3>
+                <p>安装完成后，首次打开 Cherry Studio，你将看到欢迎界面。软件会引导你完成初始设置。</p>
+                
+                <h3>体验免费模型</h3>
+                <p>Cherry Studio 提供免费模型让你立即体验，无需配置 API Key：</p>
+                <ul>
+                    <li><strong>智谱 GLM-4.5-Air：</strong>适合日常对话、代码生成和逻辑推理</li>
+                    <li><strong>通义千问 Qwen3-8B：</strong>支持 119 种语言，强大的多语言能力</li>
+                </ul>
+                
+                <p>只需在模型选择器中选择"Cherry Studio Free Models"，即可开始免费使用这些模型。</p>
+                
+                <div class="highlight-box">
+                    <strong>开始第一次对话：</strong>
+                    <ol>
+                        <li>选择一个免费模型</li>
+                        <li>在输入框中输入你的问题</li>
+                        <li>按 Enter 或点击发送按钮</li>
+                        <li>等待 AI 回复</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="models">
+                <h2>配置 AI 模型</h2>
+                
+                <h3>为什么需要配置 API Key？</h3>
+                <p>虽然 Cherry Studio 提供免费模型，但如果你想使用更强大的模型（如 GPT-4、Claude 3.5 等），需要配置相应的 API Key。</p>
+                
+                <h3>获取 API Key</h3>
+                
+                <h4>方法一：通过平台获取（推荐）</h4>
+                <p>最简单的方式是通过统一平台获取多个模型的访问权限：</p>
+                <ol>
+                    <li>访问 <a href="https://open.cherryin.ai/register?aff=fVPl" target="_blank" rel="noopener" class="cta-inline">平台注册页面</a></li>
+                    <li>注册并完成账号验证</li>
+                    <li>在控制台中创建 API Key</li>
+                    <li>将 API Key 复制到 Cherry Studio</li>
+                </ol>
+                
+                <h4>方法二：直接从服务商获取</h4>
+                <p>你也可以直接从各个 AI 服务商获取 API Key：</p>
+                <ul>
+                    <li><strong>OpenAI：</strong>访问 platform.openai.com</li>
+                    <li><strong>Anthropic：</strong>访问 console.anthropic.com</li>
+                    <li><strong>Google：</strong>访问 makersuite.google.com</li>
+                    <li><strong>智谱 AI：</strong>访问 open.bigmodel.cn</li>
+                    <li><strong>通义千问：</strong>访问 dashscope.aliyun.com</li>
+                </ul>
+                
+                <h3>在 Cherry Studio 中配置</h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>打开设置</strong>
+                    <p>点击右上角的设置图标，进入设置页面。</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>添加服务商</strong>
+                    <p>在"服务商"标签页中，点击"添加服务商"，选择你要使用的 AI 服务。</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>填入 API Key</strong>
+                    <p>在相应的配置中粘贴你的 API Key，并保存设置。</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>测试连接</strong>
+                    <p>点击"测试连接"按钮，确保配置正确。</p>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ 安全提示：</strong>API Key 是敏感信息，请妥善保管。Cherry Studio 将 API Key 加密存储在本地，不会上传到任何服务器。
+                </div>
+            </section>
+
+            <section id="features">
+                <h2>核心功能使用</h2>
+                
+                <h3>AI 对话</h3>
+                <p>Cherry Studio 的核心功能是 AI 对话。你可以：</p>
+                <ul>
+                    <li>发起新对话或继续之前的对话</li>
+                    <li>使用 Markdown 格式化消息</li>
+                    <li>上传图片进行视觉分析（支持的模型）</li>
+                    <li>上传文档进行内容分析</li>
+                    <li>导出对话记录</li>
+                </ul>
+                
+                <h3>智能助手</h3>
+                <p>Cherry Studio 内置了 1000+ 个智能助手模板，覆盖各种使用场景：</p>
+                <ul>
+                    <li><strong>写作助手：</strong>博客文章、营销文案、学术论文</li>
+                    <li><strong>编程助手：</strong>代码生成、调试、代码审查</li>
+                    <li><strong>学习助手：</strong>概念解释、习题解答、知识总结</li>
+                    <li><strong>翻译助手：</strong>多语言翻译、本地化</li>
+                    <li><strong>商务助手：</strong>邮件撰写、报告生成、数据分析</li>
+                </ul>
+                
+                <p>使用方法：点击助手图标，浏览或搜索助手，选择后即可开始使用。</p>
+                
+                <h3>知识库功能</h3>
+                <p>知识库是 Cherry Studio 的强大功能，让 AI 基于你的文档回答问题：</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>创建知识库</strong>
+                    <p>点击"知识库"按钮，创建新的知识库并命名。</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>导入文档</strong>
+                    <p>支持导入 PDF、Word、Excel、TXT、Markdown 等格式，也可以导入网页链接。</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>使用知识库</strong>
+                    <p>在对话中选择知识库，AI 会基于知识库内容回答你的问题。</p>
+                </div>
+                
+                <h3>AI 绘画</h3>
+                <p>Cherry Studio 支持多种 AI 绘画模型：</p>
+                <ul>
+                    <li>DALL-E 3（OpenAI）</li>
+                    <li>Midjourney（通过 API）</li>
+                    <li>Stable Diffusion（本地或云端）</li>
+                </ul>
+                
+                <p>使用方法：切换到绘画模式，输入提示词（Prompt），调整参数，点击生成。</p>
+                
+                <h3>AI 翻译</h3>
+                <p>Cherry Studio 内置专业的翻译功能：</p>
+                <ul>
+                    <li>支持 100+ 种语言互译</li>
+                    <li>专业术语准确翻译</li>
+                    <li>保持原文格式</li>
+                    <li>批量翻译</li>
+                </ul>
+                
+                <p>可以在翻译页面使用，也可以在对话中使用"翻译助手"。</p>
+            </section>
+
+            <section id="advanced">
+                <h2>高级技巧</h2>
+                
+                <h3>模型对比</h3>
+                <p>Cherry Studio 独特的功能：同时使用多个模型回答同一个问题，对比结果：</p>
+                <ol>
+                    <li>点击"对比模式"按钮</li>
+                    <li>选择 2-4 个模型</li>
+                    <li>输入问题</li>
+                    <li>查看不同模型的回答</li>
+                </ol>
+                
+                <p>这对于选择最适合任务的模型非常有用。</p>
+                
+                <h3>本地模型</h3>
+                <p>Cherry Studio 支持运行本地 AI 模型，完全离线使用：</p>
+                
+                <h4>使用 Ollama</h4>
+                <ol>
+                    <li>下载并安装 Ollama（ollama.com）</li>
+                    <li>在命令行运行：<code>ollama pull llama3</code></li>
+                    <li>在 Cherry Studio 中添加 Ollama 服务商</li>
+                    <li>选择下载的模型开始使用</li>
+                </ol>
+                
+                <div class="tip-box">
+                    <strong>💡 本地模型优势：</strong>
+                    <ul>
+                        <li>完全离线，无需网络</li>
+                        <li>数据绝对私密</li>
+                        <li>无使用限制</li>
+                        <li>无 API 费用</li>
+                    </ul>
+                </div>
+                
+                <h3>MCP 服务器集成</h3>
+                <p>MCP（模型上下文协议）让 AI 可以访问外部工具和数据源：</p>
+                <ul>
+                    <li>连接数据库查询数据</li>
+                    <li>访问文件系统</li>
+                    <li>调用 Web API</li>
+                    <li>执行系统命令</li>
+                </ul>
+                
+                <p>配置 MCP 服务器可以大大扩展 Cherry Studio 的能力。</p>
+                
+                <h3>自定义助手</h3>
+                <p>除了内置助手，你可以创建自己的专属助手：</p>
+                <ol>
+                    <li>点击"创建助手"</li>
+                    <li>设置助手名称和描述</li>
+                    <li>编写系统提示词（System Prompt）</li>
+                    <li>配置参数（温度、最大长度等）</li>
+                    <li>保存并使用</li>
+                </ol>
+                
+                <h3>数据备份与同步</h3>
+                <p>Cherry Studio 支持多种备份方式：</p>
+                <ul>
+                    <li><strong>本地备份：</strong>导出为 JSON 或 ZIP 文件</li>
+                    <li><strong>WebDAV 同步：</strong>自动同步到云端</li>
+                    <li><strong>定时备份：</strong>设置自动备份计划</li>
+                </ul>
+                
+                <p>建议定期备份重要对话和知识库数据。</p>
+            </section>
+
+            <section id="tips">
+                <h2>最佳实践</h2>
+                
+                <h3>提示词优化</h3>
+                <p>高质量的提示词能获得更好的 AI 回答：</p>
+                <ul>
+                    <li><strong>明确具体：</strong>清楚说明你的需求</li>
+                    <li><strong>提供上下文：</strong>给出必要的背景信息</li>
+                    <li><strong>分步骤：</strong>复杂任务分解为多个步骤</li>
+                    <li><strong>示例引导：</strong>提供期望输出的示例</li>
+                    <li><strong>设定角色：</strong>让 AI 扮演特定角色</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <strong>示例：</strong><br>
+                    ❌ 不好："写一篇文章"<br>
+                    ✅ 好："以专业营销人员的角色，写一篇 800 字的科技产品评测文章，重点对比功能、性能和价格，目标读者是企业采购决策者。"
+                </div>
+                
+                <h3>模型选择策略</h3>
+                <p>不同任务选择合适的模型：</p>
+                <ul>
+                    <li><strong>日常对话、简单任务：</strong>免费模型或小型模型</li>
+                    <li><strong>复杂推理、编程：</strong>GPT-4、Claude 3.5</li>
+                    <li><strong>快速响应：</strong>GPT-3.5、Gemini Pro</li>
+                    <li><strong>多语言：</strong>通义千问、DeepSeek</li>
+                    <li><strong>隐私敏感：</strong>本地模型</li>
+                </ul>
+                
+                <h3>知识库管理</h3>
+                <ul>
+                    <li>按主题组织知识库</li>
+                    <li>定期更新文档内容</li>
+                    <li>删除过时或无用的文档</li>
+                    <li>使用描述性的知识库名称</li>
+                    <li>合理控制知识库大小</li>
+                </ul>
+                
+                <h3>提高效率的技巧</h3>
+                <ul>
+                    <li><strong>快捷键：</strong>学习并使用快捷键（Ctrl+N 新对话，Ctrl+K 命令面板）</li>
+                    <li><strong>话题管理：</strong>使用话题标签组织对话</li>
+                    <li><strong>收藏助手：</strong>收藏常用的助手</li>
+                    <li><strong>模板复用：</strong>保存常用的提示词模板</li>
+                    <li><strong>批量操作：</strong>使用批量功能处理多个任务</li>
+                </ul>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>常见问题解决</h2>
+                
+                <h3>连接问题</h3>
+                <p><strong>问题：</strong>无法连接到 AI 模型</p>
+                <p><strong>解决方案：</strong></p>
+                <ul>
+                    <li>检查网络连接</li>
+                    <li>验证 API Key 是否正确</li>
+                    <li>检查 API 配额是否用完</li>
+                    <li>尝试更换服务商或模型</li>
+                    <li>查看错误日志获取详细信息</li>
+                </ul>
+                
+                <h3>性能问题</h3>
+                <p><strong>问题：</strong>软件运行缓慢或卡顿</p>
+                <p><strong>解决方案：</strong></p>
+                <ul>
+                    <li>清理对话历史（保留重要对话）</li>
+                    <li>关闭不必要的功能和插件</li>
+                    <li>检查系统资源使用情况</li>
+                    <li>更新到最新版本</li>
+                    <li>重启软件</li>
+                </ul>
+                
+                <h3>知识库问题</h3>
+                <p><strong>问题：</strong>知识库无法导入文档或回答不准确</p>
+                <p><strong>解决方案：</strong></p>
+                <ul>
+                    <li>确保文档格式支持</li>
+                    <li>检查文档内容是否清晰</li>
+                    <li>尝试分段导入大文档</li>
+                    <li>使用更强大的模型</li>
+                    <li>优化问题描述</li>
+                </ul>
+                
+                <h3>数据安全</h3>
+                <p><strong>问题：</strong>担心数据安全和隐私</p>
+                <p><strong>说明：</strong></p>
+                <ul>
+                    <li>Cherry Studio 所有数据本地存储</li>
+                    <li>不会上传数据到 Cherry Studio 服务器</li>
+                    <li>使用 AI 时数据发送给你选择的 AI 服务商</li>
+                    <li>建议使用本地模型处理敏感信息</li>
+                    <li>定期备份重要数据</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <strong>⚠️ 需要帮助？</strong>
+                    <p>如果遇到无法解决的问题：</p>
+                    <ul>
+                        <li>访问 <a href="https://docs.cherry-ai.com" target="_blank" rel="noopener">官方文档</a></li>
+                        <li>在 <a href="https://github.com/CherryHQ/cherry-studio" target="_blank" rel="noopener">GitHub</a> 提交 Issue</li>
+                        <li>加入社区群组获得帮助</li>
+                        <li>发送邮件至 support@cherry-ai.com</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="highlight-box" style="margin-top: 3rem; text-align: center;">
+                <h3>准备好开始你的 AI 之旅了吗？</h3>
+                <p style="margin-bottom: 1.5rem;">加入全球数十万用户，体验最强大的 AI 工作站</p>
+                <a href="https://open.cherryin.ai/register?aff=fVPl" class="cta-inline" target="_blank" rel="noopener" style="font-size: 1.125rem; padding: 1rem 2rem;">立即免费注册</a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 CharryStudio.com - All Rights Reserved</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="index.html">首页</a> | 
+                <a href="guide.html">使用教程</a> | 
+                <a href="privacy.html">隐私政策</a> | 
+                <a href="https://open.cherryin.ai/register?aff=fVPl" target="_blank" rel="noopener">立即开始</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
